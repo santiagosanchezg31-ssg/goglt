@@ -1,0 +1,502 @@
+<title>GLT Growth Playbook</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: manifiesto de carga — una columna de lectura; tablas como hojas de embarque; tickets como guías de envío */
+:root{
+  --bg:#F3F5F6; --paper:#FFFFFF; --ink:#13202A; --muted:#5A6873; --line:#D6DCE0;
+  --accent:#B85C00; --accent-soft:#FBEBDC; --steel:#28506E; --steel-soft:#E3ECF3;
+  --good:#1F7A4D; --good-soft:#E1F2E8; --warn:#9A6B00; --warn-soft:#FBF1D6; --bad:#B3261E; --bad-soft:#F9E1DF;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E151B; --paper:#151F27; --ink:#E6ECF0; --muted:#9AA8B3; --line:#2A3843;
+  --accent:#F0953A; --accent-soft:#3A2614; --steel:#8DB8D8; --steel-soft:#1C2C39;
+  --good:#5FC58F; --good-soft:#163024; --warn:#E3B84E; --warn-soft:#33290F; --bad:#F2857D; --bad-soft:#3A1A18; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E151B; --paper:#151F27; --ink:#E6ECF0; --muted:#9AA8B3; --line:#2A3843;
+  --accent:#F0953A; --accent-soft:#3A2614; --steel:#8DB8D8; --steel-soft:#1C2C39;
+  --good:#5FC58F; --good-soft:#163024; --warn:#E3B84E; --warn-soft:#33290F; --bad:#F2857D; --bad-soft:#3A1A18; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:1040px;margin:0 auto}
+header.top{padding-block:40px 28px;border-bottom:3px solid var(--ink);display:grid;gap:14px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 18px}
+.eyebrow b{color:var(--accent);font-weight:600}
+h1{font-family:var(--display);font-stretch:80%;font-weight:800;font-size:clamp(34px,6vw,58px);line-height:1.02;margin:0;text-wrap:balance;letter-spacing:-.01em}
+.lede{font-size:18px;max-width:70ch;margin:0}
+h2{font-family:var(--display);font-stretch:85%;font-weight:800;font-size:clamp(24px,3.4vw,32px);line-height:1.1;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:700;font-size:19px;margin:0;line-height:1.25;text-wrap:balance}
+p{margin:0}
+section{padding-block:40px 8px;display:grid;gap:18px}
+.sec-head{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;align-items:baseline;border-top:1px solid var(--line);padding-top:22px}
+.sec-head .code{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.06em;white-space:nowrap}
+.prose{max-width:74ch;display:grid;gap:12px}
+ul,ol{margin:0;padding-left:1.2em;display:grid;gap:6px}
+a{color:var(--steel)}
+code{font-family:var(--mono);font-size:.88em}
+.verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.vcard{background:var(--paper);border:1px solid var(--line);border-top:4px solid var(--steel);padding:16px 18px;display:grid;gap:8px;align-content:start;min-width:0}
+.vcard.hot{border-top-color:var(--accent)}
+.vcard .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.vcard .v{font-family:var(--display);font-stretch:85%;font-weight:800;font-size:22px;line-height:1.1}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.04em;padding:2px 8px;border-radius:3px;white-space:nowrap;text-transform:uppercase}
+.p-good{background:var(--good-soft);color:var(--good)} .p-warn{background:var(--warn-soft);color:var(--warn)}
+.p-bad{background:var(--bad-soft);color:var(--bad)} .p-info{background:var(--steel-soft);color:var(--steel)}
+.p-acc{background:var(--accent-soft);color:var(--accent)}
+.tbl{overflow-x:auto;background:var(--paper);border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:640px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.c{text-align:center;font-family:var(--mono)}
+tr.us td{background:var(--accent-soft)}
+.num{font-variant-numeric:tabular-nums;font-family:var(--mono)}
+.note{font-size:13.5px;color:var(--muted);max-width:82ch}
+.callout{background:var(--steel-soft);border-left:4px solid var(--steel);padding:14px 18px;display:grid;gap:6px;max-width:82ch}
+.callout.acc{background:var(--accent-soft);border-left-color:var(--accent)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.box{background:var(--paper);border:1px solid var(--line);padding:16px 18px;display:grid;gap:10px;align-content:start;min-width:0}
+.box h3 small{display:block;font-family:var(--mono);font-size:11px;font-weight:400;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.bars{display:grid;gap:9px}
+.bar{display:grid;grid-template-columns:minmax(110px,170px) 1fr;gap:10px;align-items:center;font-size:13.5px}
+.bar .lbl{font-family:var(--mono);font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.track{position:relative;height:20px;background:var(--bg);border:1px solid var(--line)}
+.fill{position:absolute;left:0;top:2px;bottom:2px;background:var(--steel);min-width:2px}
+.fill.acc{background:var(--accent)}
+.fill span{position:absolute;left:100%;margin-left:6px;top:0;font-family:var(--mono);font-size:11.5px;white-space:nowrap;color:var(--ink);line-height:16px}
+.fill.in span{left:auto;right:6px;margin-left:0;color:var(--paper)}
+.road{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.road .box{border-top:4px solid var(--ink)}
+.road .box .when{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.06em}
+.tickets{display:grid;gap:10px}
+.ticket{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--steel);padding:14px 16px;display:grid;gap:8px;min-width:0}
+.ticket.crit{border-left-color:var(--bad)} .ticket.quick{border-left-color:var(--good)}
+.ticket .th{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:baseline}
+.ticket .id{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--muted)}
+.ticket dl{display:grid;grid-template-columns:110px 1fr;gap:4px 12px;margin:0;font-size:14px}
+.ticket dt{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.ticket dd{margin:0;min-width:0;overflow-wrap:anywhere}
+@media (max-width:520px){.ticket dl{grid-template-columns:1fr}.ticket dt{padding-top:6px}.bar{grid-template-columns:92px 1fr}}
+.copyblock{position:relative;background:var(--paper);border:1px solid var(--line)}
+.copyblock pre{margin:0;padding:16px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.55;white-space:pre}
+.copyblock button{position:absolute;top:8px;right:8px;font-family:var(--mono);font-size:11px;padding:5px 10px;background:var(--ink);color:var(--bg);border:0;cursor:pointer;letter-spacing:.05em;text-transform:uppercase}
+.copyblock button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sources{font-size:13px;color:var(--muted);columns:2 300px;column-gap:28px}
+.sources li{break-inside:avoid}
+footer{margin-top:40px;padding-top:18px;border-top:3px solid var(--ink);font-size:13px;color:var(--muted)}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow"><span>Ref. GLT-GROWTH-2026-10 · Entrega final</span><span>goglt.com</span><span><b>SEO · GEO · Paid Media</b></span><span>28 oct 2026</span></div>
+  <h1>GLT debe ganar el nicho, no la subasta</h1>
+  <p class="lede">GLT tiene lo que la competencia no tiene: la única integración LTL nativa confirmada con Magaya, un programa LTL de marca blanca para brokers, cobertura en México y equipos bilingües. Pero hoy solo lo encuentra quien ya lo conoce. <strong>El 72% de su tráfico orgánico viene de búsquedas de marca, no aparece en el top 30 de ninguna de las 10 búsquedas de categoría medidas y Google AI Overviews lo cita 7 veces, frente a 1.138 de Warp.</strong> La recomendación: más SEO y GEO dentro del nicho de forwarders, brokers y el corredor EE.&nbsp;UU.–México en inglés y español, y un piloto de pauta acotado y medible.</p>
+</header>
+
+<section>
+  <div class="sec-head"><span class="code">00 / VEREDICTO</span><h2>Respuesta corta</h2></div>
+  <div class="verdict">
+    <div class="vcard hot"><span class="k">SEO</span><span class="v">Sí, mucho más, en otro terreno</span><p>Limpieza técnica en 30 días, páginas por audiencia, integración, carril e idioma, y herramientas gratuitas con foco en el cruce fronterizo. No pelear "LTL freight quote", que cuesta US$30,64 por clic.</p></div>
+    <div class="vcard hot"><span class="k">GEO (búsqueda con IA)</span><span class="v">Sí, prioridad alta y costo bajo</span><p>Corregir la ficha de la empresa, estar en YouTube, LinkedIn y directorios (las fuentes que más cita la IA), entrar en listas de terceros y publicar datos propios.</p></div>
+    <div class="vcard"><span class="k">Pauta para leads</span><span class="v">Sí: piloto de ~US$8.000/mes</span><p>Google Search de nicho en EE.&nbsp;UU., búsquedas en español en México (5–10 veces más baratas), LinkedIn ABM y Microsoft Ads. Se juzga por el costo de cada cuenta que hace su primer envío.</p></div>
+    <div class="vcard"><span class="k">Pauta de awareness</span><span class="v">Poca y dentro del nicho</span><p>YouTube, el reporte mensual en LinkedIn y co-marketing con Magaya. Nada de display masivo. Meta solo para remarketing, reclutar agentes y carriers, y marca empleadora.</p></div>
+  </div>
+  <div class="callout acc">
+    <h3>Posicionamiento recomendado</h3>
+    <p><strong>"El socio LTL y FTL transfronterizo de los freight forwarders y brokers, en inglés y en español, conectado a su software."</strong> Warp ya dominó el LTL doméstico con herramientas y un servidor MCP, pero su propia sección en español dice que no cruza la frontera y que solo atiende en inglés. Ese espacio hoy casi nadie lo defiende.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="code">01 / FUENTES</span><h2>Con qué se hizo y qué faltó</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Fuente</th><th>Estado</th><th>Qué aportó</th></tr></thead>
+    <tbody>
+      <tr><td><strong>OpenRush</strong> (conector)</td><td><span class="pill p-good">Usado</span></td><td>Tráfico y keywords estimados, posiciones en vivo, auditoría de 19 de las 101 URLs del sitemap, backlinks, citas en Google AI Overviews, volúmenes y CPC (EE.&nbsp;UU. y México). Son estimaciones del proveedor, no datos de Search Console.</td></tr>
+      <tr><td>Búsqueda web con IA</td><td><span class="pill p-good">Usado</span></td><td>Perfil de GLT y de 15+ competidores, tres mediciones de visibilidad en IA con preguntas de compradores, benchmarks de pauta y contexto de mercado.</td></tr>
+      <tr><td>Skills</td><td><span class="pill p-good">Usado</span></td><td>Auditoría SEO, visibilidad en IA, investigación profunda (5 líneas en paralelo) y plan de tickets.</td></tr>
+      <tr><td>Semrush</td><td><span class="pill p-warn">Sin unidades</span></td><td>Conectado, pero la cuenta no tiene unidades de API (semrush.com/mcp-access).</td></tr>
+      <tr><td>Ahrefs</td><td><span class="pill p-warn">Plan insuficiente</span></td><td>Conectado, responde "Insufficient plan".</td></tr>
+      <tr><td>Meta Ad Library / inteligencia publicitaria</td><td><span class="pill p-bad">No conectado</span></td><td>No hay conector oficial de Meta Ad Library. No se observaron anuncios ni gasto de la competencia (ver sección 09).</td></tr>
+      <tr><td>Similarweb, HubSpot</td><td><span class="pill p-bad">Falló</span></td><td>La red de la sesión rechazó la conexión.</td></tr>
+      <tr><td>Lectura directa de goglt.com y competidores</td><td><span class="pill p-bad">Bloqueada</span></td><td>La red de la sesión no permite esos dominios; el rastreo se hizo a través de OpenRush.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="code">02 / DIAGNÓSTICO</span><h2>GLT existe para quien ya lo conoce</h2></div>
+  <div class="verdict">
+    <div class="vcard hot"><span class="k">Tráfico orgánico</span><span class="v num">~1.859 / mes</span><p>72% de marca ("glt", "glt logistics"). El 99% entra por la home. Solo 22 de 360 keywords en el top 10.</p></div>
+    <div class="vcard hot"><span class="k">Búsquedas de categoría</span><span class="v num">0 de 10</span><p>Ninguna en el top 30: LTL to Mexico, cross-border, LTL for forwarders, Magaya LTL, drayage Miami, entre otras.</p></div>
+    <div class="vcard hot"><span class="k">Citas en AI Overviews</span><span class="v num">7</span><p>Último entre 10 dominios del sector. Warp tiene 1.138 y ExFreight 957.</p></div>
+    <div class="vcard"><span class="k">Preguntas de compradores</span><span class="v num">3 de 8</span><p>Aparece en Magaya, en su búsqueda de marca y en una lista cross-border. 0 de 8 en el set ampliado.</p></div>
+  </div>
+
+  <h3>Comparativo orgánico (OpenRush, EE.&nbsp;UU.)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Dominio</th><th>Keywords</th><th>Top 10</th><th>Tráfico org./mes</th><th>Valor equiv. en pauta/mes</th><th>Cómo gana</th></tr></thead>
+    <tbody>
+      <tr><td>wearewarp.com</td><td class="num">3.747</td><td class="num">952</td><td class="num">~22.199</td><td class="num">~US$155.477</td><td>Herramientas gratuitas: CWT (60,5K búsquedas), freight class/NMFC (14,8K), tamaños de pallet (18,1K), consulta DOT (12,1K)</td></tr>
+      <tr><td>exfreight.com</td><td class="num">2.422</td><td class="num">629</td><td class="num">~10.328</td><td class="num">~US$65.809</td><td>Glosario y guías: "sli" en posición 3 (33,1K búsquedas)</td></tr>
+      <tr class="us"><td><strong>goglt.com</strong></td><td class="num">360</td><td class="num">22</td><td class="num">~1.859</td><td class="num">~US$18.153</td><td>Solo su marca</td></tr>
+      <tr><td>go-freight.ai</td><td class="num">852</td><td class="num">32</td><td class="num">~742</td><td class="num">~US$4.837</td><td>"Top 10" propios de Miami: poco tráfico, pero muchas citas en IA</td></tr>
+      <tr><td>bringgoship.com</td><td class="num">38</td><td class="num">14</td><td class="num">~88</td><td class="num">~US$8</td><td>Blog sobre México, con un post de la MVE en español</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Las herramientas asignan a goglt.com "competidores" como globaltransport.us.com o thegtigroup.com: empresas con nombres parecidos, no rivales de negocio. Es una señal de confusión de marca, sumada a Glatfelter (NYSE: GLT), una GLT saudí con la que Dealroom la mezcla y otras logísticas homónimas.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="code">03 / GEO</span><h2>Visibilidad en IA: medida tres veces</h2></div>
+  <div class="box">
+    <h3><small>Citas como fuente en Google AI Overviews · muestra EE.&nbsp;UU. · OpenRush</small>GLT queda último del grupo</h3>
+    <div class="bars" role="img" aria-label="Citas en Google AI Overviews: uShip 4276, Freightquote 1657, Warp 1138, FreightCenter 1034, ExFreight 957, TRAFFIX 112, Nuvocargo 37, Go Freight AI 29, BringGo 26, GLT 7">
+      <div class="bar"><span class="lbl">uship.com</span><div class="track"><div class="fill in" style="width:100%"><span>4.276</span></div></div></div>
+      <div class="bar"><span class="lbl">freightquote.com</span><div class="track"><div class="fill" style="width:38.8%"><span>1.657</span></div></div></div>
+      <div class="bar"><span class="lbl">wearewarp.com</span><div class="track"><div class="fill" style="width:26.6%"><span>1.138</span></div></div></div>
+      <div class="bar"><span class="lbl">freightcenter.com</span><div class="track"><div class="fill" style="width:24.2%"><span>1.034</span></div></div></div>
+      <div class="bar"><span class="lbl">exfreight.com</span><div class="track"><div class="fill" style="width:22.4%"><span>957</span></div></div></div>
+      <div class="bar"><span class="lbl">traffix.com</span><div class="track"><div class="fill" style="width:2.6%"><span>112</span></div></div></div>
+      <div class="bar"><span class="lbl">nuvocargo.com</span><div class="track"><div class="fill" style="width:0.9%"><span>37</span></div></div></div>
+      <div class="bar"><span class="lbl">go-freight.ai</span><div class="track"><div class="fill" style="width:0.7%"><span>29</span></div></div></div>
+      <div class="bar"><span class="lbl">bringgoship.com</span><div class="track"><div class="fill" style="width:0.6%"><span>26</span></div></div></div>
+      <div class="bar"><span class="lbl"><strong>goglt.com</strong></span><div class="track"><div class="fill acc" style="width:0.2%"><span>7</span></div></div></div>
+    </div>
+    <p class="note">Mide cuántas veces la IA usa el dominio como fuente, no cuántas veces menciona la marca. Solo cubre Google AI Overviews. Go Freight AI tiene menos tráfico que GLT pero cuatro veces más citas, porque publica el formato que la IA reutiliza.</p>
+  </div>
+
+  <h3>Preguntas de compradores (búsqueda con IA, una corrida por pregunta)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Pregunta</th><th>v1</th><th>v2</th><th>v3</th><th>Quién aparece en la v3</th></tr></thead>
+    <tbody>
+      <tr><td>Best LTL provider for freight forwarders with Magaya integration</td><td><span class="pill p-good">Sí</span></td><td><span class="pill p-good">Sí</span></td><td><span class="pill p-good">Sí</span></td><td>GLT es la respuesta principal, citando a magaya.com</td></tr>
+      <tr><td>GLT Logistics goglt Mexico cross-border Laredo (marca)</td><td><span class="pill p-good">Sí</span></td><td><span class="pill p-good">Sí</span></td><td><span class="pill p-good">Sí</span></td><td>Cinco URLs de goglt.com; dice "22+ años" en una respuesta</td></tr>
+      <tr><td>US–Mexico cross-border freight 3PL LTL FTL</td><td><span class="pill p-bad">No</span></td><td><span class="pill p-good">Sí</span></td><td><span class="pill p-good">Sí</span></td><td>Lista de siete con TRAFFIX, R+L, Direct Drive, Distrubi, Mexicom</td></tr>
+      <tr><td>3PL with LTL for forwarders in Miami, instant-quote portal</td><td><span class="pill p-bad">No</span></td><td><span class="pill p-bad">No</span></td><td><span class="pill p-bad">No</span></td><td>Warp, Go Freight AI, ExFreight</td></tr>
+      <tr><td>Best LTL freight broker in Miami</td><td><span class="pill p-bad">No</span></td><td><span class="pill p-bad">No</span></td><td><span class="pill p-bad">No</span></td><td>Go Freight (sus propios Top 10), Direct Drive, Lakeocean, ExFreight</td></tr>
+      <tr><td>Best cross-border freight companies USA–Mexico 2026</td><td><span class="pill p-bad">No</span></td><td><span class="pill p-bad">No</span></td><td><span class="pill p-bad">No</span></td><td>Schneider, Werner, C.H. Robinson, Load One</td></tr>
+      <tr><td>LTL shipping to Mexico from the USA quote</td><td><span class="pill p-bad">No</span></td><td><span class="pill p-bad">No</span></td><td><span class="pill p-bad">No</span></td><td>Old Dominion, Estes, ArcBest, XPO, FedEx, Mexicom</td></tr>
+      <tr><td>Empresa de transporte México–EE.&nbsp;UU., cruce LTL (español)</td><td><span class="pill p-bad">No</span></td><td><span class="pill p-bad">No</span></td><td><span class="pill p-bad">No</span></td><td>DHL, DNUSMIR, Mexicom/TransMexicom, EP Logistics</td></tr>
+      <tr><td><strong>Total preguntas originales</strong></td><td class="num">2/8</td><td class="num">3/8</td><td class="num">3/8</td><td>Set ampliado de la v3 (programas white-label, drayage Miami, Laredo–Monterrey, agentes, español): <strong>0/8</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout">
+    <h3>El hallazgo más útil</h3>
+    <p>Cuando se preguntó por un programa LTL de marca blanca para brokers o un partner LTL para forwarders, la IA respondió que <strong>no encontró ninguno</strong>. GLT ofrece exactamente eso desde 2020, pero vive en go.shipwithglt.com y en notas de prensa, fuera de las fuentes que la IA lee.</p>
+  </div>
+  <div class="grid2">
+    <div class="box"><h3><small>Fuentes que más cita la IA · "LTL freight shipping"</small>No son sitios de logística</h3><p class="num" style="font-size:13.5px">youtube.com 2.834 · linkedin.com 1.548 · google.com 1.542 · facebook.com 1.368 · fedex.com 1.021 · reddit.com 971 · mapquest.com 890 · wikipedia 825 · freightquote 686 · uship 637 · carriersource 577 · wearewarp 349 · yelp 330</p></div>
+    <div class="box"><h3><small>Fuentes que más cita la IA · "cross border freight Mexico"</small>YouTube y LinkedIn primero</h3><p class="num" style="font-size:13.5px">youtube.com 352 · linkedin.com 280 · wikipedia 240 · facebook.com 176 · carriersource.io 136 · mapquest 112 · reddit 80 · freightwaves 72 · fmcsa 56 · mexicomlogistics 48 · xpo 48 · yelp 40</p></div>
+  </div>
+  <p class="note">Las reseñas de GLT en Yelp (1,3★) y MapQuest (~1,5★), con 3 reseñas cada una, están justo en fuentes que la IA cita.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="code">04 / COMPETENCIA</span><h2>Cómo gana cada rival y dónde está el hueco</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Competidor</th><th>Qué hace bien</th><th>Amenaza</th><th>Hueco para GLT</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Warp</strong></td><td>Herramientas gratuitas, 1.500+ páginas de carril, 5 familias de URL para Miami, página para forwarders, comparativas, programa de agentes y servidor MCP desde abril de 2026 (los agentes de IA cotizan sin clave)</td><td><span class="pill p-bad">Directa</span></td><td>Su sección /es dice que no cruza la frontera y solo atiende en inglés</td></tr>
+      <tr><td><strong>ExFreight</strong></td><td>Glosario, guías ("USA to Mexico 2026 Guide"), su propio ranking de forwarders de Miami y un llms-full.txt</td><td><span class="pill p-bad">Alta</span></td><td>No tiene oferta para forwarders y brokers ni integración nativa con su software</td></tr>
+      <tr><td><strong>Go Freight AI</strong></td><td>Listas "Top 10 (2026)" de Miami y Florida en dos dominios, siempre primero; domina las respuestas de IA sobre Miami</td><td><span class="pill p-bad">Alta en Miami</span></td><td>Sus listas rankean en posiciones 12–15 y traen poco tráfico: la posición es frágil</td></tr>
+      <tr><td><strong>BringGo Ship</strong></td><td>Posts "best cross-border 3PL", MVE en español</td><td><span class="pill p-warn">Media</span></td><td>Casi sin tráfico (~88 visitas al mes)</td></tr>
+      <tr><td><strong>C.H. Robinson · TRAFFIX</strong></td><td>White papers en español sobre el cruce; TRAFFIX publica un pronóstico trimestral que la prensa cubre</td><td><span class="pill p-warn">Media</span></td><td>Contenido corporativo, sin foco en forwarders medianos</td></tr>
+      <tr><td><strong>uShip · Freightquote · FreightCenter</strong></td><td>Autoridad enorme (Freightquote ~186.000 visitas orgánicas al mes) y pauta en "LTL quote"</td><td><span class="pill p-info">Evitar</span></td><td>No competir de frente en términos genéricos</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout">
+    <p><strong>El nicho está repartido.</strong> En búsquedas como "ltl shipping to mexico", "freight broker miami", "white label ltl" o "3pl miami" rankean nxtpointlogistics.com, clutch.co, interwf.com, go-freight.ai, smithfreightbrokerage.com y 3plmiami.com: jugadores pequeños, sin un gigante que defienda esas páginas de resultados.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="code">05 / PLAN DE ARREGLOS</span><h2>Tickets priorizados para el sitio y la marca</h2></div>
+  <p class="prose">Objetivo: que goglt.com sea legible y confiable para Google y la IA antes de invertir en contenido y pauta. <strong>3 críticos, 4 de arreglo rápido y 4 planificados.</strong> La base técnica es buena (puntaje on-page 95,2/100, sin dependencia de JavaScript); los problemas están en la identidad del sitio.</p>
+
+  <h3>Críticos</h3>
+  <div class="tickets">
+    <div class="ticket crit"><div class="th"><span class="id">T-1</span><h3>Confirmar y sacar del índice dev.goglt.com y los borradores</h3><span class="pill p-bad">Crítico</span></div>
+      <dl><dt>Dónde</dt><dd>dev.goglt.com; <code>?p=10679</code> ("GLT x Magaya2"); <code>/glt-magaya-integration-trial/</code></dd>
+      <dt>Qué</dt><dd>dev.goglt.com apareció indexado en una búsqueda del 28 oct; la auditoría no pudo reconfirmarlo. Primero verificarlo en Search Console. Si está indexado: protegerlo con contraseña y <code>noindex</code>, y pedir su retiro. Despublicar los borradores.</dd>
+      <dt>Quién</dt><dd>Desarrollo web + responsable de SEO</dd><dt>Esfuerzo</dt><dd>Menos de un día</dd>
+      <dt>Aceptación</dt><dd>dev.goglt.com responde 401 o lleva <code>noindex</code>; los borradores dan 404/410 o redirigen.</dd>
+      <dt>Verificar</dt><dd>Inspección de URL en Search Console y búsqueda <code>site:dev.goglt.com</code> tras el re-rastreo.</dd></dl></div>
+    <div class="ticket crit"><div class="th"><span class="id">T-2</span><h3>Revisar la ola de backlinks spam del 28 oct</h3><span class="pill p-bad">Crítico</span></div>
+      <dl><dt>Dónde</dt><dd>Perfil de enlaces de goglt.com (spam score 43; decenas de dominios como urlrank.space o aibacklinkgenerator.shop)</dd>
+      <dt>Qué</dt><dd>Revisar en Search Console que no haya acción manual. Exportar los dominios spam y subir un archivo disavow preventivo. No comprar servicios de "limpieza".</dd>
+      <dt>Quién</dt><dd>Responsable de SEO</dd><dt>Esfuerzo</dt><dd>Medio día, más una revisión semanal durante un mes</dd>
+      <dt>Aceptación</dt><dd>Sin acciones manuales; archivo disavow cargado con la lista exportada.</dd>
+      <dt>Verificar</dt><dd>Informe de acciones manuales vacío; seguir el conteo de dominios spam nuevos cada semana.</dd></dl></div>
+    <div class="ticket crit"><div class="th"><span class="id">T-3</span><h3>Quitar "Facebook" de todos los títulos</h3><span class="pill p-bad">Crítico</span></div>
+      <dl><dt>Dónde</dt><dd>Plantilla global del sitio (las 19 páginas auditadas)</dd>
+      <dt>Qué</dt><dd>Los títulos terminan en "| GLT LogisticsFacebook": el texto del ícono de Facebook (un SVG con &lt;title&gt; o un segundo &lt;title&gt;) se mete en la etiqueta. Corregir la plantilla del ícono. Arreglar también el título duplicado de /magaya-calculator/.</dd>
+      <dt>Quién</dt><dd>Desarrollo web</dd><dt>Esfuerzo</dt><dd>Menos de un día</dd>
+      <dt>Aceptación</dt><dd>Un solo &lt;title&gt; por página, sin "Facebook"; /magaya-calculator/ con título de menos de 60 caracteres.</dd>
+      <dt>Verificar</dt><dd>Ver el código fuente de 5 plantillas y pedir el re-rastreo. Si Google sigue mostrando "3PL" u "Oficial WebSite", es el índice viejo: puede tardar días en actualizarse.</dd></dl></div>
+  </div>
+
+  <h3>Arreglos rápidos</h3>
+  <div class="tickets">
+    <div class="ticket quick"><div class="th"><span class="id">T-4</span><h3>Redirigir las URLs <code>?p=</code> y los archivos de blog duplicados</h3><span class="pill p-good">Rápido</span></div>
+      <dl><dt>Dónde</dt><dd><code>?p=10, 12, 14, 25, 33, 37, 3982, 5575, 10852</code>; brokerage.goglt.com/?p=1108 y ?p=1666; /blog-old/ ("Blog 3") y /all-posts/</dd>
+      <dt>Qué</dt><dd>301 de cada <code>?p=</code> a su URL limpia y canonical correcto. Dejar un solo archivo de blog (301 o <code>noindex</code> en los demás).</dd>
+      <dt>Quién</dt><dd>Desarrollo web</dd><dt>Esfuerzo</dt><dd>Menos de un día</dd>
+      <dt>Aceptación</dt><dd>Cada <code>?p=</code> responde 301 en un solo salto; /blog-old/ redirige a /blog/.</dd>
+      <dt>Verificar</dt><dd>Revisar los códigos de respuesta. Google puede mantener las URLs viejas en su grupo de duplicados hasta dos semanas; no dar el arreglo por fallido antes.</dd></dl></div>
+    <div class="ticket quick"><div class="th"><span class="id">T-5</span><h3>Un solo H1 por página</h3><span class="pill p-good">Rápido</span></div>
+      <dl><dt>Dónde</dt><dd>Plantilla global (19 de 19 páginas con varios H1)</dd>
+      <dt>Qué</dt><dd>Dejar como H1 solo el título principal; pasar los demás a H2 o a texto con estilo.</dd>
+      <dt>Quién</dt><dd>Desarrollo web</dd><dt>Esfuerzo</dt><dd>Menos de un día</dd>
+      <dt>Aceptación</dt><dd>Exactamente un &lt;h1&gt; en home, servicios, LTL, agentes y carriers.</dd>
+      <dt>Verificar</dt><dd>Volver a auditar las mismas 19 URLs.</dd></dl></div>
+    <div class="ticket quick"><div class="th"><span class="id">T-6</span><h3>Ficha oficial de la empresa en todos los perfiles</h3><span class="pill p-good">Rápido</span></div>
+      <dl><dt>Dónde</dt><dd>Web, LinkedIn (2 páginas), Crunchbase (2 entidades), Dealroom, Google Business Profile, Yelp, MapQuest, Fulfill.com, Creditsafe</dd>
+      <dt>Qué</dt><dd>Hoy hay cuatro direcciones, antigüedad de "22+" o "24" años, tamaño de 15 a 1.000 empleados y Dealroom la mezcla con una GLT de Riad. Definir una ficha (año, dirección, cifras, servicios), replicarla y pedir la fusión o corrección de las entidades duplicadas. Actualizar el post viejo que dice que GLT "está explorando" México.</dd>
+      <dt>Quién</dt><dd>Marketing</dd><dt>Esfuerzo</dt><dd>1–2 días</dd>
+      <dt>Aceptación</dt><dd>Nombre, dirección y teléfono idénticos en 8 o más perfiles; una sola entidad en LinkedIn y Crunchbase.</dd>
+      <dt>Verificar</dt><dd>Revisar cada perfil y repetir la pregunta de marca en la IA.</dd></dl></div>
+    <div class="ticket quick"><div class="th"><span class="id">T-7</span><h3>Completar las páginas delgadas</h3><span class="pill p-good">Rápido</span></div>
+      <dl><dt>Dónde</dt><dd>/extra-charges/ (131 palabras, sin meta description), /agents/become-an-agent-today/ (149), /carriers/join-our-network/ (148)</dd>
+      <dt>Qué</dt><dd>Convertir /extra-charges/ en una guía de cargos accesorios LTL con tabla y FAQ, con meta description. Ampliar las otras dos con requisitos, proceso y preguntas frecuentes.</dd>
+      <dt>Quién</dt><dd>Contenido + operaciones (para los datos)</dd><dt>Esfuerzo</dt><dd>1–2 días</dd>
+      <dt>Aceptación</dt><dd>Cada página responde la pregunta principal en el primer párrafo, con datos que operaciones haya validado.</dd>
+      <dt>Verificar</dt><dd>Revisión editorial y nueva auditoría de las 3 URLs.</dd></dl></div>
+  </div>
+
+  <h3>Planificados</h3>
+  <div class="tickets">
+    <div class="ticket"><div class="th"><span class="id">T-8</span><h3>Landings permanentes por audiencia e integración</h3><span class="pill p-info">Planificado</span></div>
+      <dl><dt>Dónde</dt><dd>/solutions/freight-forwarders, /solutions/freight-brokers, /integrations/magaya, página de Canadá</dd>
+      <dt>Qué</dt><dd>La integración con Magaya hoy solo existe como nota de prensa, y el programa para brokers vive en go.shipwithglt.com. Llevar ambos a goglt.com con caso de uso, demo, FAQ y el cotizador visible.</dd>
+      <dt>Quién</dt><dd>Marketing + desarrollo web</dd><dt>Esfuerzo</dt><dd>1–2 semanas</dd>
+      <dt>Aceptación</dt><dd>Cuatro URLs indexables enlazadas desde el menú principal, con schema Service y FAQPage.</dd>
+      <dt>Verificar</dt><dd>Inspección de URL; seguir "magaya ltl" y "ltl for freight forwarders" en el tracking de posiciones.</dd></dl></div>
+    <div class="ticket"><div class="th"><span class="id">T-9</span><h3>Sitio en español /es/ con hreflang</h3><span class="pill p-info">Planificado</span></div>
+      <dl><dt>Dónde</dt><dd>/es/ (home, LTL, México, forwarders, checklist MVE)</dd>
+      <dt>Qué</dt><dd>Redacción nativa por los equipos bilingües, no traducción automática, con hreflang en-US / es-MX.</dd>
+      <dt>Quién</dt><dd>Contenido (equipo Colombia/México) + desarrollo web</dd><dt>Esfuerzo</dt><dd>3–6 semanas</dd>
+      <dt>Aceptación</dt><dd>Cada página /es/ con hreflang recíproco y canonical propio.</dd>
+      <dt>Verificar</dt><dd>Revisar el hreflang y la cobertura en Search Console para México.</dd></dl></div>
+    <div class="ticket"><div class="th"><span class="id">T-10</span><h3>Herramientas gratuitas con foco transfronterizo</h3><span class="pill p-info">Planificado</span></div>
+      <dl><dt>Dónde</dt><dd>/tools/: calculadora de clase y densidad LTL, checklist de documentos para México (MVE, Carta Porte, pedimento), estimador de tiempos de cruce por puerto</dd>
+      <dt>Qué</dt><dd>El formato con el que Warp atrae la mayor parte de su tráfico, pero con el ángulo que Warp no cubre. La MVE es obligatoria desde el 1 oct 2026, con facilidades hasta el 31 dic.</dd>
+      <dt>Quién</dt><dd>Producto/desarrollo + operaciones</dd><dt>Esfuerzo</dt><dd>2–4 semanas por herramienta</dd>
+      <dt>Aceptación</dt><dd>Herramientas funcionando sin login, en inglés y español, con CTA al portal.</dd>
+      <dt>Verificar</dt><dd>Eventos de uso en GA4 y altas en el portal desde cada herramienta.</dd></dl></div>
+    <div class="ticket"><div class="th"><span class="id">T-11</span><h3>Páginas de carril con datos reales</h3><span class="pill p-info">Planificado</span></div>
+      <dl><dt>Dónde</dt><dd>Miami, Laredo⇄Monterrey, Laredo⇄Bajío, CDMX, Guadalajara, drayage Port Miami / Port Everglades (10–15 páginas)</dd>
+      <dt>Qué</dt><dd>Tiempos, cruces, documentos y FAQ por carril, con datos de la operación de GLT. Sin plantillas vacías.</dd>
+      <dt>Quién</dt><dd>Contenido + operaciones</dd><dt>Esfuerzo</dt><dd>1 día por página</dd>
+      <dt>Aceptación</dt><dd>Cada página con al menos tres datos propios del carril que operaciones haya validado.</dd>
+      <dt>Verificar</dt><dd>Indexación y posiciones del set de carriles.</dd></dl></div>
+  </div>
+  <p class="note"><strong>Qué no hacer todavía:</strong> no producir contenido nuevo ni lanzar pauta hacia landings mientras T-1, T-3 y T-4 sigan abiertos. No reescribir meta descriptions en lote mientras los títulos sigan rotos.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="code">06 / DEMANDA</span><h2>Volúmenes y costo por clic (OpenRush)</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Keyword</th><th>Mercado</th><th>Búsquedas/mes</th><th>CPC</th><th>Uso recomendado</th></tr></thead>
+    <tbody>
+      <tr><td>ltl freight quote</td><td>EE.&nbsp;UU.</td><td class="num">2.400</td><td class="num">US$30,64</td><td><span class="pill p-bad">Evitar en pauta</span> Los marketplaces dominan</td></tr>
+      <tr><td>ltl freight shipping</td><td>EE.&nbsp;UU.</td><td class="num">6.600</td><td class="num">US$26,84</td><td><span class="pill p-bad">Evitar en pauta</span></td></tr>
+      <tr><td>ltl freight</td><td>EE.&nbsp;UU.</td><td class="num">14.800</td><td class="num">US$16,68</td><td><span class="pill p-warn">SEO de largo plazo</span></td></tr>
+      <tr><td>freight forwarder</td><td>EE.&nbsp;UU.</td><td class="num">18.100</td><td class="num">US$13,21</td><td><span class="pill p-warn">Contenido de apoyo</span></td></tr>
+      <tr><td>what is ltl freight</td><td>EE.&nbsp;UU.</td><td class="num">2.400</td><td class="num">US$10,96</td><td><span class="pill p-good">Guía + video</span></td></tr>
+      <tr><td>freight class / nmfc calculator</td><td>EE.&nbsp;UU.</td><td class="num">14.800</td><td class="num">US$7,36</td><td><span class="pill p-good">Herramienta (T-10)</span></td></tr>
+      <tr><td>logistic transportation services</td><td>EE.&nbsp;UU.</td><td class="num">480</td><td class="num">US$14,74</td><td><span class="pill p-good">GLT ya está en posición 3</span></td></tr>
+      <tr><td>transporte de carga</td><td>México</td><td class="num">6.600</td><td class="num">US$2,94</td><td><span class="pill p-good">Pauta + /es/</span></td></tr>
+      <tr><td>agente de carga</td><td>México</td><td class="num">320</td><td class="num">US$5,15</td><td><span class="pill p-good">Pauta + /es/</span></td></tr>
+      <tr><td>transporte de carga pesada</td><td>México</td><td class="num">390</td><td class="num">US$3,96</td><td><span class="pill p-warn">Probar</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">El long-tail de nicho ("LTL for freight forwarders", "Magaya LTL", "white label LTL", "cross border LTL Mexico") tiene volúmenes demasiado bajos para medirlos con precisión, pero es donde GLT tiene la oferta más diferenciada y casi ningún rival defendiendo.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="code">07 / ESTRATEGIA</span><h2>SEO en cuatro capas, GEO en cinco movimientos</h2></div>
+  <div class="grid2">
+    <div class="box"><h3><small>SEO</small>Cuatro capas</h3>
+      <ol>
+        <li><strong>Limpieza (días 1–30):</strong> tickets T-1 a T-7.</li>
+        <li><strong>Páginas que no existen:</strong> forwarders, brokers, Magaya, Canadá y carriles (T-8, T-11).</li>
+        <li><strong>Herramientas gratuitas</strong> con ángulo transfronterizo (T-10).</li>
+        <li><strong>Sitio /es/ nativo</strong> (T-9), donde Warp no compite y la pauta cuesta 5–10 veces menos.</li>
+      </ol></div>
+    <div class="box"><h3><small>GEO</small>Cinco movimientos</h3>
+      <ol>
+        <li><strong>Ficha oficial única</strong> + schema Organization con sameAs (T-6).</li>
+        <li><strong>Estar en las fuentes que cita la IA:</strong> canal de YouTube con videos cortos que respondan preguntas (cotizar LTL a México, qué es la MVE, GLT dentro de Magaya), voceros en LinkedIn, y reseñas reales en Google Business Profile, Clutch, GoodFirms y CarrierSource.</li>
+        <li><strong>Que otros incluyan a GLT en sus listas:</strong> directorio de partners de Magaya, CarrierSource, prensa del sector. Si GLT publica comparativas, deben estar firmadas como contenido de GLT.</li>
+        <li><strong>Datos propios citables:</strong> convertir el reporte mensual en un índice con datos de los envíos de GLT y una sola fecha de corte. Hoy dos posts del mismo mes se contradicen (diésel a US$6,529 vs. US$5,59).</li>
+        <li><strong>llms.txt y apertura a bots de IA</strong> (barato, sin expectativas: el 97% de los llms.txt no recibió peticiones). Desde el mes 6, evaluar una API pública o un servidor MCP de cotización, como Warp.</li>
+      </ol></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="code">08 / PAUTA</span><h2>Piloto de 90 días: qué, cuánto y cómo se juzga</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Partida</th><th>%</th><th>US$/mes</th><th>Lógica y cálculo orientativo</th></tr></thead>
+    <tbody>
+      <tr><td>Google Search EE.&nbsp;UU., nicho (inglés)</td><td class="num">32%</td><td class="num">2.560</td><td>CPC esperado ~US$8–15 en long-tail → ~170–320 clics; con 3–8% de conversión, ~5–25 leads</td></tr>
+      <tr><td>Google Search México (español)</td><td class="num">12%</td><td class="num">960</td><td>CPC ~US$3–5 → ~190–320 clics; prueba con exportadores de México hacia EE.&nbsp;UU.</td></tr>
+      <tr><td>Marca ("GLT Logistics", "GLT portal")</td><td class="num">3%</td><td class="num">240</td><td>Defensa barata frente a homónimos y competidores</td></tr>
+      <tr><td>Microsoft Ads con perfiles de LinkedIn</td><td class="num">5%</td><td class="num">400</td><td>Copia de las campañas de nicho a menor CPC</td></tr>
+      <tr><td>LinkedIn ABM (Lead Gen Forms + thought-leader ads)</td><td class="num">30%</td><td class="num">2.400</td><td>CPL de referencia US$100–200 → ~12–24 leads. Cuentas: forwarders y brokers de EE.&nbsp;UU. y México, usuarios de Magaya (2.300+ clientes), shippers con exposición a México</td></tr>
+      <tr><td>Remarketing (Google, LinkedIn, Meta)</td><td class="num">8%</td><td class="num">640</td><td>Visitantes de landings, herramientas y portal</td></tr>
+      <tr><td>Awareness de nicho (YouTube, co-marketing Magaya, newsletters)</td><td class="num">10%</td><td class="num">800</td><td>Se mide por búsquedas de marca y citas en IA</td></tr>
+      <tr><td><strong>Total en medios</strong></td><td class="num"><strong>100%</strong></td><td class="num"><strong>~8.000</strong></td><td>Aparte: producción de contenido, herramientas y /es/ (~US$4.000–6.000/mes en equipo o agencia)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Los rangos de leads son aritmética sobre los benchmarks citados y los CPC de OpenRush, no un pronóstico. Referencia general (WordStream 2026): CPC US$5,42 y CPL US$66,69, pero los términos LTL reales de EE.&nbsp;UU. cuestan 3–6 veces más.</p>
+  <div class="grid2">
+    <div class="box"><h3><small>Antes del primer dólar</small>Medición</h3><ul><li>GA4 y Search Console; segmentos de visitas desde chatgpt.com, perplexity.ai, gemini y claude.ai.</li><li>Importar desde el CRM a Google y LinkedIn: alta en el portal, primera cotización y <strong>primer envío</strong>.</li><li>Negativas: mudanzas, autos, empleo, cursos, "cheap".</li></ul></div>
+    <div class="box"><h3><small>Regla de decisión</small>Escalar o cortar</h3><p>Un canal crece si su costo por cuenta activada (con primer envío) queda por debajo del margen bruto de esa cuenta en sus primeros 3–6 meses. Si en 90 días no llega, se corta. LinkedIn necesita los 90 días completos antes de juzgarlo.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="code">09 / COMPETENCIA EN PAUTA</span><h2>Cómo vigilar los anuncios de la competencia</h2></div>
+  <p class="prose">En esta sesión no se pudo observar ningún anuncio de la competencia: no existe un conector oficial de Meta Ad Library y los conectores de inteligencia publicitaria no están conectados. Lo único visible es indirecto: los marketplaces (Freightquote, FreightCenter, uShip) son los que más probablemente pujan en "LTL freight quote", y las digitales con capital de riesgo (Warp, Nuvocargo, Loadsmart) ganan visibilidad sobre todo con prensa, podcasts y webinars.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Plataforma</th><th>Revisión manual (gratis)</th><th>Conector para automatizar</th></tr></thead>
+    <tbody>
+      <tr><td>Meta (Facebook, Instagram)</td><td><a href="https://www.facebook.com/ads/library/">Meta Ad Library</a>: "Todos los anuncios", por página, en EE.&nbsp;UU. y México. Fuera de la UE no muestra gasto.</td><td>AdWhispr Ads o Adspirer Social Ads</td></tr>
+      <tr><td>TikTok</td><td>TikTok Ad Library</td><td>AdWhispr Ads o Adspirer Social Ads</td></tr>
+      <tr><td>Google (Search, YouTube, Display)</td><td><a href="https://adstransparency.google.com">Ads Transparency Center</a>, por anunciante o dominio; y el Auction Insights propio cuando GLT lance búsqueda</td><td>Adspirer Search Ads (conexión a medio terminar) o unidades de Semrush</td></tr>
+      <tr><td>Microsoft / Bing</td><td>Auction Insights propio</td><td>Adspirer Search Ads</td></tr>
+      <tr><td>LinkedIn</td><td><a href="https://www.linkedin.com/ad-library">LinkedIn Ad Library</a>; es donde se pelean forwarders y brokers</td><td>Adspirer Ads &amp; Performance</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box"><h3><small>Registro semanal · 30 minutos</small>Qué anotar por competidor</h3>
+    <p><strong>Lista fija:</strong> Warp, ExFreight, Go Freight AI (.ai y .io), uShip, Freightquote/C.H. Robinson, FreightCenter, BringGo, Nuvocargo, TRAFFIX, Mexicom/TransMexicom, Direct Drive.</p>
+    <p><strong>Campos:</strong> anuncios activos, formato, oferta o llamado a la acción (cotización, demo, contenido), audiencia aparente (shippers, forwarders, agentes), idioma (EN/ES), landing de destino y días activo. Un anuncio que sigue activo más de 60 días probablemente convierte.</p></div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="code">10 / HOJA DE RUTA</span><h2>Qué pasa y cómo se mide</h2></div>
+  <div class="road">
+    <div class="box"><span class="when">DÍAS 1–30</span><h3>Limpieza y medición</h3><ul><li>Tickets T-1 a T-7.</li><li>Google Business Profile, schema, robots y llms.txt.</li><li>GA4, Search Console e importación de conversiones desde el CRM.</li></ul><p class="note">Salida: 0 URLs basura en Search Console; ficha idéntica en 8+ perfiles.</p></div>
+    <div class="box"><span class="when">DÍAS 31–60</span><h3>Landings y piloto</h3><ul><li>Forwarders, brokers y Magaya (T-8).</li><li>Pilar "LTL a México" en inglés y primera landing /es/.</li><li>Arranque del piloto de pauta.</li><li>Alta en Clutch, GoodFirms, CarrierSource y primeras reseñas.</li></ul><p class="note">Salida: primeras keywords objetivo en el top 30; CPL y costo por cuenta activada por canal.</p></div>
+    <div class="box"><span class="when">DÍAS 61–90</span><h3>Autoridad</h3><ul><li>Índice mensual con datos propios.</li><li>5–8 páginas de carril (T-11).</li><li>Calculadora y checklist MVE (T-10).</li><li>Canal de YouTube (6–8 videos) y webinar con Magaya.</li></ul><p class="note">Salida: prueba de preguntas de compradores ≥5/8; ≥3 keywords de nicho en el top 10; decisión de escalar o cortar la pauta.</p></div>
+    <div class="box"><span class="when">MESES 4–12</span><h3>Escala</h3><ul><li>/es/ completo (T-9).</li><li>Más integraciones con TMS y sus páginas.</li><li>Una nota trimestral en prensa y casos de cliente con cifras.</li><li>Evaluar API pública o MCP de cotización.</li></ul><p class="note">Salida: tráfico no-marca por encima del 40% del orgánico; citas en AI Overviews de 7 a ≥70.</p></div>
+  </div>
+  <p class="note">El SEO y el GEO tardan: los primeros cambios se ven a los 30–90 días y los resultados de categoría a los 6–12 meses. Nadie puede garantizar posiciones ni que una IA recomiende a una empresa; los objetivos de salida son metas de seguimiento, no promesas.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="code">11 / ARCHIVOS</span><h2>Borradores listos para revisar</h2></div>
+  <p class="prose">Los datos entre corchetes los tiene que confirmar GLT antes de publicar. No completé nada que GLT no haya dicho públicamente.</p>
+  <h3>/llms.txt</h3>
+  <div class="copyblock"><button type="button" data-copy="llms">Copiar</button><pre id="llms"># GLT Logistics
+
+&gt; GLT Logistics is a non-asset third-party logistics (3PL) provider headquartered in Miami, Florida, operating since [CONFIRMAR AÑO]. It provides LTL, full truckload, temperature-controlled, open-deck and container drayage services across the United States, Mexico and Canada, for shippers, freight forwarders and freight brokers.
+
+## Services
+- [LTL Freight Shipping](https://goglt.com/ltl/): U.S., Mexico and Canada.
+- [Container Drayage](https://goglt.com/services/container-drayage/): port drayage, including hazmat.
+- [Mexico Freight Services](https://goglt.com/mexico-freight-services/): LTL with 98% national coverage in Mexico, FTL, drayage from ports, CTPAT carriers, bilingual teams.
+- [Cargo Insurance](https://goglt.com/services/cargo-insurance/)
+
+## For freight forwarders and brokers
+- Customer Portal: instant LTL quotes, tracking, dashboards, billing, white-label branding.
+- Native Magaya integration: https://goglt.com/glt-logistics-and-magaya-new-freight-management-workflow/
+- LTL program for brokers: [CONFIRMAR URL]
+- API connections to ERP, TMS and WMS.
+
+## Key resources
+- [Mexico cross-border shipping documentation](https://goglt.com/mexico-cross-border-shipping-documentation/)
+- [Freight Savings ROI Calculator](https://goglt.com/glt-calculator/)
+- [Monthly freight market updates](https://goglt.com/blog/)
+
+## Company facts
+- Headquarters: [CONFIRMAR DIRECCIÓN], Miami, FL, USA
+- Shipments delivered: [CONFIRMAR CIFRA ACTUAL]
+- GLT is not a licensed customs broker; it coordinates with the customs broker of the customer's choice.
+- Contact: [CONFIRMAR EMAIL Y TELÉFONO]; Mexico: mexico@goglt.com</pre></div>
+
+  <h3>Schema Organization (JSON-LD)</h3>
+  <div class="copyblock"><button type="button" data-copy="schema">Copiar</button><pre id="schema">&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "GLT Logistics",
+  "url": "https://goglt.com/",
+  "logo": "[CONFIRMAR URL DEL LOGO]",
+  "foundingDate": "[CONFIRMAR AÑO]",
+  "description": "Non-asset 3PL providing LTL, FTL, temperature-controlled and drayage services across the US, Mexico and Canada for shippers, freight forwarders and brokers.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "[CONFIRMAR]",
+    "addressLocality": "[Miami / Miami Springs]",
+    "addressRegion": "FL",
+    "postalCode": "33166",
+    "addressCountry": "US"
+  },
+  "areaServed": ["US", "MX", "CA"],
+  "knowsLanguage": ["en", "es"],
+  "sameAs": [
+    "[CONFIRMAR URL ÚNICA DE LINKEDIN]",
+    "[CONFIRMAR URL DE CRUNCHBASE]",
+    "https://brokerage.goglt.com/"
+  ]
+}
+&lt;/script&gt;</pre></div>
+
+  <h3>robots.txt (agregar si hoy bloquea bots de IA)</h3>
+  <div class="copyblock"><button type="button" data-copy="robots">Copiar</button><pre id="robots">User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /</pre></div>
+  <p class="note">El robots.txt actual no se pudo leer directamente; revísalo antes de cambiarlo para no borrar reglas existentes.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="code">FUENTES</span><h2>Fuentes consultadas</h2></div>
+  <ul class="sources">
+    <li>OpenRush (conector): inspect_domain, inspect_search_visibility, audit_site, inspect_backlinks, inspect_ai_visibility, discover_ai_citations, discover_competitors, research_keywords · 28 oct 2026</li>
+    <li><a href="https://goglt.com/">goglt.com</a> · <a href="https://goglt.com/mexico-freight-services/">Mexico Freight Services</a> · <a href="https://goglt.com/mexico-cross-border-shipping-documentation/">Documentación cross-border</a> · <a href="https://goglt.com/freight-market-update-october-2026-diesel-tariffs-more/">Update oct 2026</a></li>
+    <li><a href="https://www.magaya.com/magaya-and-glt-logistics-launch-integration-to-streamline-inland-transportation-workflows/">Magaya × GLT</a> · <a href="https://www.magaya.com/magaya-partners/">Magaya Partners</a> · <a href="https://dcvelocity.com/articles/48741-glt-logistics-is-introducing-a-new-service-that-offers-an-opportunity-for-brokers-to-provide-ltl">DC Velocity: LTL para brokers</a></li>
+    <li><a href="https://www.yelp.com/biz/glt-logistics-miami-2">Yelp</a> · <a href="https://www.mapquest.com/us/florida/glt-logistics-490247667">MapQuest</a> · <a href="https://app.dealroom.co/companies/glt">Dealroom</a> · <a href="https://www.crunchbase.com/organization/glt-logistics">Crunchbase</a> · <a href="https://www.fulfill.com/3pl/profile/glt-logistics">Fulfill.com</a></li>
+    <li><a href="https://www.wearewarp.com/industries/freight-forwarders">Warp: forwarders</a> · <a href="https://www.wearewarp.com/es/que-es-ltl">Warp /es</a> · <a href="https://glama.ai/mcp/servers/warpfreight/warp-agent-mcp">Warp MCP</a></li>
+    <li><a href="https://www.exfreight.com/shipping-from-usa-to-mexico/">ExFreight: USA to Mexico</a> · <a href="https://www.exfreight.com/llms-full.txt">ExFreight llms-full.txt</a> · <a href="https://go-freight.ai/top-10-freight-brokers-miami/">Go Freight AI: Top 10</a> · <a href="https://bringgoship.com/en/blog/best-cross-border-3pl-us-mexico">BringGo</a></li>
+    <li><a href="https://www.chrobinson.com/es-mx/resources/resource-center/white-papers/cross-border-shipping-options/">C.H. Robinson es-mx</a> · <a href="https://www.ajot.com/news/traffix-warns-of-sustained-rate-cycle-shift-across-north-america-in-q2-2026-freight-market-update">TRAFFIX (AJOT)</a></li>
+    <li><a href="https://www.bts.gov/newsroom/north-american-transborder-freight-valued-1606-billion-august-2026-226-august-2025">BTS ago 2026</a> · <a href="https://www.intertradeaa.com/post/manifestaci%C3%B3n-de-valor-electr%C3%B3nica-2026-qu%C3%A9-cambia-con-la-pr%C3%B3rroga-hasta-el-30-de-septiembre">MVE 2026</a></li>
+    <li><a href="https://www.wordstream.com/blog/2026-google-ads-benchmarks">WordStream 2026</a> · <a href="https://metadata.io/resources/blog/what-linkedin-ads-cost">Metadata: LinkedIn</a> · <a href="https://zenabm.com/blog/linkedin-thought-leader-ads-for-abm">ZenABM</a> · <a href="https://www.prosemedia.com/blog/offline-conversion-imports-b2b-paid-search">Prose Media: OCI</a></li>
+    <li><a href="https://lumengeo.co/blog/state-of-ai-citations-2026">LumenGEO</a> · <a href="https://searchengineland.com/google-ai-overviews-cite-self-serving-listicles-recommend-competitors-480573">Search Engine Land</a> · <a href="https://projectllmstxt.com/blog/llms-txt-adoption-2026">Project LLMs.txt</a> · <a href="https://peec.ai/ai-search-geo-statistics">Peec AI</a></li>
+  </ul>
+</section>
+
+<footer>Preparado para el equipo de GLT Logistics · Entrega final, 28 de octubre de 2026 · Informe completo y notas de investigación en la rama <code>claude/glt-growth-research</code> del repositorio.</footer>
+</div>
+
+<script>
+document.querySelectorAll('[data-copy]').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var el=document.getElementById(btn.getAttribute('data-copy'));
+    var text=el.innerText;
+    function selectIt(){var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Seleccionado';}
+    try{
+      navigator.clipboard.writeText(text).then(function(){btn.textContent='Copiado';setTimeout(function(){btn.textContent='Copiar'},1600)},selectIt);
+    }catch(e){selectIt()}
+  });
+});
+</script>
